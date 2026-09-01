@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --plasma-cyan: 79 214 255;
+  --plasma-violet: 139 123 255;
+  --plasma-magenta: 255 106 213;
+  --plasma-amber: 255 180 87;
+
+  /* Active accent — a subdued metallic/graphite tone */
+  --accent: 210 215 225;
+  --accent-2: 180 185 195;
+
+  /* Deep Charcoal / Navy background */
+  --bg: 12 14 18;
+  --ink: 245 245 240; /* Off-white */
+
+  /* Global glow multiplier. Glow is emphasis, not the default surface
+     treatment — 0.1 ≈ 90% less than the original values. */
+  --glow: 0.1;
+
+  /* Motion tokens. Every transition in the project pulls from these three
+     curves so unrelated components can't drift apart. `lab` is the house
+     ease-out; `lab-in-out` is for anything that returns to where it started. */
+  --ease-lab: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-lab-in-out: cubic-bezier(0.62, 0, 0.24, 1);
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 800ms;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: auto; /* Lenis owns smooth scroll */
+}
+
+body {
+  margin: 0;
+  background-color: rgb(var(--bg));
+  color: rgb(var(--ink));
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  /* clip (not hidden) contains transformed/3D children without creating a
+     scroll container — so position: sticky in the pinned sections still works. */
+  overflow-x: clip;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 1.2s var(--ease-lab);
+}
+
+/* ---- Type defaults -------------------------------------------------------
+   Headings balance their lines instead of leaving one word stranded; body
+   copy avoids a single-word last line. Set once here so no component has to
+   remember it. */
+h1,
+h2,
+h3,
+h4,
+blockquote {
+  text-wrap: balance;
+}
+
+p,
+li,
+figcaption {
+  text-wrap: pretty;
+}
+
+/* Underlines from the font's own metrics rather than wherever the browser
+   decides, and never through a descender. */
+a {
+  text-underline-position: from-font;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: auto;
+  text-underline-offset: 0.18em;
+}
+
+/* Any number that changes on screen holds its column width. */
+.tnum,
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Focus ---------------------------------------------------------------
+   The custom cursor hides the pointer, so keyboard focus is the only
+   affordance some visitors get. Make it unmissable and accent-aware. */
+:focus-visible {
+  outline: 2px solid rgb(var(--accent) / 0.9);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+
+/* When Lenis is active it manages scroll position */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---- Custom cursor: hide the native one only on fine pointers when active ---- */
+@media (pointer: fine) {
+  html[data-custom-cursor="on"],
+  html[data-custom-cursor="on"] * {
+    cursor: none !important;
+  }
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.3);
+  color: #fff;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* ---------------------------------------------------------------- utilities */
+@layer components {
+  .glass {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.01)
+    );
+    backdrop-filter: blur(12px) saturate(110%);
+    -webkit-backdrop-filter: blur(12px) saturate(110%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-strong {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02)
+    );
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .hairline {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* ---- Micro-labels ------------------------------------------------------
+     One token for the ~30 places that each invented their own
+     `font-mono text-[9px] uppercase tracking-[0.28em]` pair. 11px is the
+     floor: below that, tracking stops separating letters and starts
+     dissolving the word. The negative right margin cancels the trailing
+     letter-space so centred labels actually sit centred. */
+  .label {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-right: -0.22em;
+  }
+
+  /* Longer strings need less tracking or they run out of container. */
+  .label-tight {
+    letter-spacing: 0.13em;
+    margin-right: -0.13em;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
+    text-transform: uppercase;
+    color: rgb(var(--accent));
+  }
+
+  /* Standard section rhythm. One value, so the vertical beat between
+     sections is a system rather than a per-file guess. */
+  .section-y {
+    padding-block: 7.5rem;
+  }
+  @media (min-width: 768px) {
+    .section-y {
+      padding-block: 11rem;
+    }
+  }
+
+  /* Content shell — every section aligns to the same two gutters. */
+  .shell {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      #fff 0%,
+      rgb(var(--accent)) 55%,
+      rgb(var(--accent-2)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* the gradient clips to the glyphs, so descenders need the room */
+    padding-bottom: 0.06em;
+  }
+
+  .glow-accent {
+    box-shadow:
+      0 0 0 1px rgb(var(--accent) / 0.4),
+      0 0 calc(30px * var(--glow)) rgb(var(--accent) / calc(0.35 * var(--glow))),
+      0 0 calc(80px * var(--glow)) rgb(var(--accent) / calc(0.15 * var(--glow)));
+  }
+
+  .btn-plasma {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.6rem;
+    border-radius: 999px;
+    font-family: var(--font-mono), monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #05060b;
+    background: linear-gradient(100deg, rgb(var(--accent)), rgb(var(--accent-2)));
+    box-shadow: 0 0 calc(40px * var(--glow)) rgb(var(--accent) / calc(0.4 * var(--glow)));
+    transition:
+      transform var(--dur-base) var(--ease-lab),
+      box-shadow var(--dur-base) var(--ease-lab);
+  }
+  .btn-plasma:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 calc(60px * var(--glow)) rgb(var(--accent) / calc(0.6 * var(--glow)));
+  }
+  .btn-plasma:active {
+    transform: translateY(0);
+    transition-duration: var(--dur-fast);
+  }
+
+  /* Text link that animates its own underline — `text-decoration` can only
+     animate colour reliably, so the rule is a pseudo-element. */
+  .link-underline {
+    position: relative;
+    text-decoration: none;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.15em;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-lab);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+@layer utilities {
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  /* Premium Volumetric Atmosphere */
+  .atmosphere {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background: 
+      radial-gradient(ellipse at top center, rgba(var(--accent) / 0.05) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(var(--accent-2) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at center left, rgba(var(--accent) / 0.02) 0%, transparent 40%);
+    mix-blend-mode: screen;
+  }
+}
+
+@keyframes reactor-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Radial vignette helper */
+.vignette {
+  background: radial-gradient(
+    120% 120% at 50% 20%,
+    transparent 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* ------------------------------------------------ reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
