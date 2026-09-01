@@ -581,7 +581,7 @@ function ParticleReactorCore() {
       {/* 2. Electric Sparks (Dense swirling particles) */}
       <points>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={sparksCount} array={sparksPositions} itemSize={3} />
+          <bufferAttribute attach="attributes-position" args={[sparksPositions, 3]} />
         </bufferGeometry>
         <shaderMaterial
           vertexShader={sparkleVertexShader}
@@ -596,7 +596,7 @@ function ParticleReactorCore() {
       {/* 1. Particle Halo (Sparse outer particles) */}
       <points>
         <bufferGeometry>
-          <bufferAttribute attach="attributes-position" count={haloCount} array={haloPositions} itemSize={3} args={[]} />
+          <bufferAttribute attach="attributes-position" args={[haloPositions, 3]} />
         </bufferGeometry>
         <shaderMaterial
           vertexShader={haloVertexShader}
