@@ -15,13 +15,6 @@ const inter = Inter({
   display: "swap",
 });
 
-const interDisplay = Inter({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
 const mono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
@@ -49,7 +42,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05060b",
+  themeColor: "#131210",
   width: "device-width",
   initialScale: 1,
 };
@@ -58,13 +51,13 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${interDisplay.variable} ${inter.variable} ${mono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${mono.variable}`}>
       <body className="relative antialiased bg-void text-ink font-sans">
         <AppProviders>
           <Corridor />
           <SharedCanvasMount />
           <div className="relative z-10" style={{ overflowX: "clip" }}>
-            <a href="#featured-systems" className="sr-only fixed left-4 top-4 z-[100] rounded bg-white px-4 py-3 font-mono text-sm text-black focus:not-sr-only focus:outline focus:outline-2 focus:outline-cyan-300">
+            <a href="#featured-systems" className="sr-only fixed left-4 top-4 z-[100] rounded bg-white px-4 py-3 font-mono text-sm text-black focus:not-sr-only focus:outline focus:outline-2 focus:outline-[rgb(var(--accent))]">
               Skip to projects
             </a>
             {children}

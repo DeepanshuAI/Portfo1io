@@ -19,7 +19,7 @@ export default function Contact() {
     <section id="contact" className="section-y relative flex min-h-screen flex-col items-center justify-center">
       <div className="shell relative z-10 flex h-full w-full flex-grow flex-col items-center justify-center pt-32 pb-16 text-center">
         <SectionHeading
-          index="06"
+          index="05"
           eyebrow="Open to junior opportunities"
           title="Let’s talk about the work."
           intro="For frontend, full-stack, or design-focused frontend roles, email me or open a draft with a short note about the opportunity."
@@ -37,13 +37,13 @@ export default function Contact() {
             ref={triggerRef}
             type="button"
             onClick={() => setIsOpen(true)}
-            className="inline-flex min-h-14 items-center rounded-full border border-white/20 bg-void px-10 font-mono text-sm uppercase tracking-[0.16em] text-white transition-colors hover:border-white/40 hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+            className="inline-flex min-h-14 items-center rounded-full border border-white/20 bg-void px-10 font-mono text-sm uppercase tracking-[0.16em] text-white transition-colors hover:border-white/40 hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--accent))]"
           >
             Draft an email
           </button>
           <a
             href={`mailto:${SITE.email}`}
-            className="font-mono text-sm text-cyan-300 underline decoration-white/20 underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+            className="font-mono text-sm text-[rgb(var(--accent))] underline decoration-white/20 underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--accent))]"
           >
             {SITE.email}
           </a>
@@ -143,7 +143,7 @@ function ContactModal({ onClose }: { onClose: () => void }) {
               type="button"
               onClick={onClose}
               aria-label="Close contact form"
-              className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full text-2xl text-white/60 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+              className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full text-2xl text-white/60 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-[rgb(var(--accent))]"
             >
               <span aria-hidden="true">×</span>
             </button>
@@ -163,14 +163,14 @@ function ContactModal({ onClose }: { onClose: () => void }) {
                 <Field label="Message" name="message" value={form.message} error={errors.message} isTextArea onChange={(value) => setForm((current) => ({ ...current, message: value }))} />
                 <button
                   type="submit"
-                  className="mt-2 flex min-h-12 w-full items-center justify-center rounded border border-white/20 bg-white/5 font-mono text-sm tracking-widest text-white transition-colors hover:border-white/40 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+                  className="mt-2 flex min-h-12 w-full items-center justify-center rounded border border-white/20 bg-white/5 font-mono text-sm tracking-widest text-white transition-colors hover:border-white/40 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--accent))]"
                 >
                   OPEN EMAIL DRAFT
                 </button>
               </form>
 
               <p className="mt-6 border-t border-white/10 pt-5 text-center text-xs text-white/50">
-                Prefer to write it yourself? <a href={`mailto:${SITE.email}`} className="text-cyan-300 underline underline-offset-4">Email {SITE.email}</a>
+                Prefer to write it yourself? <a href={`mailto:${SITE.email}`} className="text-[rgb(var(--accent))] underline underline-offset-4">Email {SITE.email}</a>
               </p>
             </div>
           </motion.div>
@@ -196,7 +196,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
   ref,
 ) {
   const errorId = `${name}-error`;
-  const fieldClass = "w-full rounded border border-white/15 bg-transparent px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-cyan-300 focus:bg-white/5";
+  const fieldClass = "w-full rounded border border-white/15 bg-transparent px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-[rgb(var(--accent))] focus:bg-white/5";
 
   return (
     <div className="flex w-full flex-col gap-1.5">

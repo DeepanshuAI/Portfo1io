@@ -9,14 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        display: ["Iowan Old Style", "Baskerville", "Palatino Linotype", "Book Antiqua", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       /**
        * Type scale, named by role rather than by size, with line-height and
        * tracking baked in so a size can't be used at the wrong rhythm.
-       * `display-*` is Sora (headings), `body-*` is Inter, `label-*` is mono.
+       * `display-*` is an editorial system serif, `body-*` is Inter, `label-*` is mono.
        * Tailwind's defaults stay available, but new work should use these.
        */
       fontSize: {
@@ -62,22 +62,22 @@ const config: Config = {
       },
       colors: {
         void: {
-          DEFAULT: "#05060b",
-          900: "#070812",
-          800: "#0b0d18",
-          700: "#12152a",
+          DEFAULT: "#131210",
+          900: "#191714",
+          800: "#211e1a",
+          700: "#302a23",
         },
         plasma: {
-          cyan: "#4fd6ff",
-          violet: "#8b7bff",
-          magenta: "#ff6ad5",
-          amber: "#ffb457",
-          mint: "#5df2c0",
+          cyan: "#d8bd91",
+          violet: "#a18f7f",
+          magenta: "#be918b",
+          amber: "#dcc297",
+          mint: "#a9aa8f",
         },
         ink: {
-          DEFAULT: "#e8ecf6",
-          muted: "#8a93a6",
-          faint: "#4c5468",
+          DEFAULT: "#f3eee4",
+          muted: "#aaa398",
+          faint: "#726b61",
         },
       },
       letterSpacing: {

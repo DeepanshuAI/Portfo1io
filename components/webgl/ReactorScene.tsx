@@ -328,9 +328,9 @@ varying vec3 vNormal;
 varying vec3 vPosition;
 ${noiseGLSL}
 void main() {
-  vec3 baseColor = vec3(0.545, 0.361, 0.965); // Core: #8B5CF6
-  vec3 coreColor = vec3(0.753, 0.518, 0.988); // Mid Glow: #C084FC
-  vec3 edgeColor = vec3(1.000, 0.235, 0.675); // Highlights: #FF3CAC
+  vec3 baseColor = vec3(0.47, 0.39, 0.28); // muted bronze
+  vec3 coreColor = vec3(0.76, 0.66, 0.50); // champagne
+  vec3 edgeColor = vec3(0.70, 0.43, 0.40); // muted rose
   
   float noise = snoise(vPosition * 3.0 - uTime * 0.5);
   float noise2 = snoise(vPosition * 6.0 + uTime * 0.3);
@@ -388,7 +388,7 @@ void main() {
   // Highlight only the peaks of the noise and the extreme edges
   float alpha = smoothstep(0.3, 0.8, vNoise) * 0.3 + pow(fresnel, 3.0) * 0.7;
   
-  vec3 color = mix(vec3(0.545, 0.361, 0.965), vec3(1.000, 0.235, 0.675), fresnel);
+  vec3 color = mix(vec3(0.47, 0.39, 0.28), vec3(0.70, 0.43, 0.40), fresnel);
   
   gl_FragColor = vec4(color, alpha);
 }
@@ -427,7 +427,7 @@ void main() {
   float pAlpha = smoothstep(0.5, 0.0, dist);
   
   vec3 cWhite = vec3(1.0, 1.0, 1.0);
-  vec3 cPink = vec3(1.0, 0.4, 0.8);
+  vec3 cPink = vec3(0.82, 0.68, 0.52);
   vec3 color = mix(cPink, cWhite, vAlpha);
   
   gl_FragColor = vec4(color, pAlpha * vAlpha * 0.8);
@@ -544,7 +544,7 @@ function ParticleReactorCore() {
       {/* 5. Inner Reactor (Structural wireframe) */}
       <mesh ref={innerReactorRef}>
         <icosahedronGeometry args={[0.75, 2]} />
-        <meshBasicMaterial color="#FF3CAC" wireframe transparent opacity={0.4} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#be918b" wireframe transparent opacity={0.4} blending={THREE.AdditiveBlending} />
       </mesh>
 
       {/* 4. Plasma Layer (Turbulent glowing base sphere) */}
@@ -603,8 +603,8 @@ function ParticleReactorCore() {
         />
       </points>
       
-      <pointLight color="#FF3CAC" intensity={3.0} distance={20} />
-      <pointLight color="#8B5CF6" intensity={2.0} distance={10} />
+      <pointLight color="#be918b" intensity={2.0} distance={20} />
+      <pointLight color="#d8bd91" intensity={1.4} distance={10} />
     </group>
   );
 }

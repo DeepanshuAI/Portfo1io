@@ -16,7 +16,7 @@ const smoothstep = (e0: number, e1: number, x: number) => {
 
 export default function Hero() {
   const reduced = usePrefersReducedMotion();
-  const { images, ready } = useImageSequence(HERO_SEQUENCE.count, srcFor, reduced);
+  const { images, requestFrames } = useImageSequence(HERO_SEQUENCE.count, srcFor, reduced);
 
   const pinRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -48,6 +48,7 @@ export default function Hero() {
   useEffect(() => {
     let raf = 0;
     let running = true;
+    let lastRequestedFrame = -1;
 
     const computeProgress = () => {
       const el = pinRef.current;
@@ -89,6 +90,10 @@ export default function Hero() {
             : 0.8 + (p - 0.6) * 0.5;
       const frameF = clamp(eased) * (HERO_SEQUENCE.count - 1);
       const idx = Math.min(HERO_SEQUENCE.count - 1, Math.round(frameF));
+      if (idx !== lastRequestedFrame) {
+        requestFrames(idx + 1, 3);
+        lastRequestedFrame = idx;
+      }
       const img = images.current[idx];
 
       ctx.clearRect(0, 0, w, h);
@@ -156,7 +161,7 @@ export default function Hero() {
       running = false;
       cancelAnimationFrame(raf);
     };
-  }, [images, reduced, ready]);
+  }, [images, reduced, requestFrames]);
 
   return (
     <section id="hero" className="relative">
@@ -175,7 +180,8 @@ export default function Hero() {
             <canvas
               ref={canvasRef}
               className="absolute inset-0 h-full w-full"
-              style={{ mixBlendMode: "screen" }}
+              style={{ mixBlendMode: "screen", filter: "sepia(.58) saturate(.72)" }}
+              aria-hidden="true"
             />
 
             <div
@@ -198,7 +204,7 @@ export default function Hero() {
           >
             <div className="max-w-3xl pointer-events-auto">
               <motion.h1
-                initial={{ opacity: 0, y: 26 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 1, ease: EASE }}
                 className="font-display text-display-fluid-xl font-bold uppercase tracking-tight"
@@ -206,15 +212,15 @@ export default function Hero() {
                 {SITE.name}
               </motion.h1>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.42, duration: 1, ease: EASE }}
-                className="mt-6 text-display-sm font-semibold text-cyan-400"
+                className="mt-6 text-display-sm font-semibold text-[rgb(var(--accent))]"
               >
                 {SITE.role}
               </motion.p>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.54, duration: 1, ease: EASE }}
                 className="mt-4 max-w-[50ch] text-body-lg text-ink/70"
@@ -222,7 +228,7 @@ export default function Hero() {
                 {SITE.statement}
               </motion.p>
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 1, ease: EASE }}
                 className="mt-4 font-mono text-xs uppercase tracking-widest text-ink/55"
@@ -230,18 +236,18 @@ export default function Hero() {
                 {SITE.availability}
               </motion.p>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.66, duration: 1, ease: EASE }}
                 className="mt-8 flex flex-wrap items-center gap-2 md:gap-4"
               >
-                <a href="#featured-systems" className="inline-flex min-h-12 items-center gap-2 border border-white/20 bg-white/5 px-4 py-3 font-mono text-xs tracking-widest text-white transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:gap-3 md:px-6 md:text-sm">
-                  VIEW PROJECTS <span className="text-cyan-400" aria-hidden="true">→</span>
+                <a href="#featured-systems" className="inline-flex min-h-12 items-center gap-2 border border-white/20 bg-white/5 px-4 py-3 font-mono text-xs tracking-widest text-white transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--accent))] md:gap-3 md:px-6 md:text-sm">
+                  VIEW PROJECTS <span className="text-[rgb(var(--accent))]" aria-hidden="true">→</span>
                 </a>
-                <a href="#contact" className="inline-flex min-h-12 items-center border border-white/10 px-4 py-3 font-mono text-xs tracking-widest text-white/75 transition-colors hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:px-6 md:text-sm">
+                <a href="#contact" className="inline-flex min-h-12 items-center border border-white/10 px-4 py-3 font-mono text-xs tracking-widest text-white/75 transition-colors hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--accent))] md:px-6 md:text-sm">
                   CONTACT
                 </a>
-                <a href="/resume.pdf" download="Deepanshu-Yadav-Resume.pdf" className="inline-flex min-h-12 items-center border border-cyan-300/30 px-4 py-3 font-mono text-xs tracking-widest text-cyan-200 transition-colors hover:border-cyan-200 hover:bg-cyan-200/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:px-6 md:text-sm">
+                <a href="/resume.pdf" download="Deepanshu-Yadav-Resume.pdf" className="inline-flex min-h-12 items-center border border-[rgb(var(--accent)/.45)] px-4 py-3 font-mono text-xs tracking-widest text-[rgb(var(--accent))] transition-colors hover:bg-[rgb(var(--accent)/.12)] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--accent))] md:px-6 md:text-sm">
                   RESUME (PDF)
                 </a>
               </motion.div>
@@ -259,7 +265,7 @@ export default function Hero() {
             >
               <div className="mb-3 h-[1px] w-8 bg-white/30" />
               <p className="font-display text-[1.25rem] md:text-3xl leading-[1.4] md:leading-snug font-medium text-white md:text-white/90">
-                I build full-stack products, <br className="hidden md:block"/>
+                I build full-stack projects, <br className="hidden md:block"/>
                 <span className="text-white/70 md:text-white/40">not just interfaces.</span>
               </p>
             </div>
@@ -270,12 +276,12 @@ export default function Hero() {
               className="absolute bottom-0 h-[40svh] left-6 right-6 flex flex-col justify-center md:h-auto md:top-auto md:bottom-[25%] md:left-24 md:right-auto md:w-[400px] z-10 opacity-0"
               style={{ willChange: 'transform, opacity' }}
             >
-              <div className="mb-3 flex items-center gap-3 text-[10px] md:text-xs font-mono text-cyan-400 tracking-widest uppercase">
-                <span className="block h-1.5 w-1.5 rounded-full bg-cyan-400" />
+              <div className="mb-3 flex items-center gap-3 text-[10px] md:text-xs font-mono text-[rgb(var(--accent))] tracking-widest uppercase">
+                <span className="block h-1.5 w-1.5 rounded-full bg-[rgb(var(--accent))]" />
                 Systems
               </div>
               <p className="font-display text-[1.25rem] md:text-3xl leading-[1.4] md:leading-snug font-medium text-white md:text-white/90">
-                I work across frontend, backend, data, and automation to turn ideas into working systems.
+                The Student Management System connects a React interface to an Express API and MongoDB.
               </p>
             </div>
 
@@ -290,7 +296,7 @@ export default function Hero() {
               </div>
               <p className="font-display text-[1.35rem] md:text-3xl leading-[1.4] md:leading-snug font-medium text-white md:text-white/90">
                 I bring design thinking into engineering — <br className="md:hidden"/>
-                <span className="text-cyan-400 md:text-cyan-400/80">so what I build works well and feels right.</span>
+                <span className="text-[rgb(var(--accent))]">so the details feel as considered as the code.</span>
               </p>
             </div>
           </div>

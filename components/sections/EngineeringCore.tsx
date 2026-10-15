@@ -2,35 +2,28 @@
 
 import SectionHeading from "@/components/ui/SectionHeading";
 import { PERSONAL } from "@/lib/site";
-import { Canvas } from "@react-three/fiber";
-import ReactorScene from "@/components/webgl/ReactorScene";
-import { usePrefersReducedMotion } from "@/lib/hooks";
 
 export default function EngineeringCore() {
-  const reducedMotion = usePrefersReducedMotion();
   return (
-    <section id="engineering-core" className="section-y relative h-[150vh]">
-      
-      {/* 3D WebGL Reactor Core Background (Interactive) */}
-      <div className="absolute inset-0 z-0 h-screen sticky top-0 pointer-events-auto">
-        <Canvas camera={{ position: [0, 2, 8], fov: 45 }} frameloop={reducedMotion ? "demand" : "always"}>
-          <ReactorScene />
-        </Canvas>
-      </div>
+    <section id="engineering-core" className="section-y relative min-h-[100svh]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(216,189,145,0.10),transparent_48%),radial-gradient(ellipse_at_70%_60%,rgba(190,145,139,0.07),transparent_42%)]"
+      />
 
-      <div className="sticky top-0 flex min-h-screen flex-col items-center justify-between py-24 md:py-32 z-10 pointer-events-none">
+      <div className="relative z-10 flex min-h-[70svh] flex-col items-center justify-between py-24 md:min-h-[75svh] md:py-32">
         
         {/* Title */}
         <div className="shell w-full text-center">
           <SectionHeading
             index="02"
-            eyebrow="Engineering Core"
+            eyebrow="Technical foundations"
             title={
               <>
-                Deepanshu <span className="text-gradient">Yadav</span>
+                Tools, <span className="text-gradient">connected.</span>
               </>
             }
-            intro="Hover a technology to see which portfolio project uses it."
+            intro="An interactive view of technologies used across the portfolio and featured project repositories."
             align="center"
           />
         </div>
@@ -38,7 +31,7 @@ export default function EngineeringCore() {
         {/* daily drivers — the unglamorous half of the stack */}
         <div className="mx-auto mt-auto max-w-2xl px-6 text-center">
           <div className="label text-ink-muted/70">
-            Technologies in Featured Work
+            Technologies shown in the work
           </div>
           <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {PERSONAL.tools.map((t) => (

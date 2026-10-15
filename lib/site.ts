@@ -12,6 +12,7 @@ export const SITE = {
   socials: [
     { label: "GitHub", href: "https://github.com/DeepanshuAI" },
     { label: "LinkedIn", href: "https://linkedin.com/in/deepanshu-yadav-484a82270/" },
+    { label: "Resume", href: "/resume.pdf" },
     { label: "Email", href: "mailto:deepanshu4551@gmail.com" },
   ],
 } as const;
@@ -36,10 +37,9 @@ export const SECTIONS: SectionMeta[] = [
   { id: "hero", index: "00", label: "Origin" },
   { id: "featured-systems", index: "01", label: "Featured Systems" },
   { id: "engineering-core", index: "02", label: "Engineering Core" },
-  { id: "design-thinking", index: "03", label: "Method" },
-  { id: "process", index: "04", label: "Pipeline" },
-  { id: "playground", index: "05", label: "Experiments" },
-  { id: "contact", index: "06", label: "Transmit" },
+  { id: "skills", index: "03", label: "Capabilities" },
+  { id: "process", index: "04", label: "Approach" },
+  { id: "contact", index: "05", label: "Contact" },
 ];
 
 export type SkillNode = {
@@ -60,7 +60,7 @@ export const SKILL_LAYERS: SkillLayer[] = [
   {
     key: "frontend",
     label: "Frontend",
-    color: "79 214 255",
+    color: "216 189 145",
     nodes: [
       { name: "React", category: "UI library", description: "Component based UI library used in the portfolio and featured projects.", projects: ["Portfolio", "Student Management System", "Kairos", "FlowPilot AI"] },
       { name: "TypeScript", category: "Language", description: "Used in the portfolio and Kairos frontend.", projects: ["Portfolio", "Kairos"] },
@@ -71,7 +71,7 @@ export const SKILL_LAYERS: SkillLayer[] = [
   {
     key: "fullstack",
     label: "Full-Stack",
-    color: "93 242 192",
+    color: "190 145 139",
     nodes: [
       { name: "Node.js", category: "Runtime", description: "Runtime used by the Student Management System API.", projects: ["Student Management System"] },
       { name: "Express", category: "Web framework", description: "Server framework used for the Student Management System API.", projects: ["Student Management System"] },
@@ -82,7 +82,7 @@ export const SKILL_LAYERS: SkillLayer[] = [
   {
     key: "interface",
     label: "Interactive UI",
-    color: "139 123 255",
+    color: "169 170 143",
     nodes: [
       { name: "Framer Motion", category: "Animation library", description: "Used for animated interface elements in the portfolio and FlowPilot.", projects: ["Portfolio", "FlowPilot AI"] },
       { name: "Three.js", category: "3D library", description: "Used for the portfolio's WebGL scenes and the Kairos 3D experience.", projects: ["Portfolio", "Kairos"] },
@@ -127,8 +127,8 @@ export const PROJECTS: Project[] = [
     image: "/projects/stumansys.png",
     imageMode: "cover",
     environment: "holographic",
-    accent: "79 214 255",
-    accent2: "93 242 192",
+    accent: "216 189 145",
+    accent2: "190 145 139",
     repo: "https://github.com/DeepanshuAI/Student-Management-System",
   },
   {
@@ -144,15 +144,15 @@ export const PROJECTS: Project[] = [
     image: "/projects/kairos.png",
     imageMode: "cover",
     environment: "crystal",
-    accent: "139 123 255",
-    accent2: "180 140 255",
+    accent: "216 189 145",
+    accent2: "190 145 139",
     repo: "https://github.com/DeepanshuAI/Kairos",
     href: "https://kairos-seven-theta.vercel.app/"
   },
   {
     id: "flowpilot",
     title: "FlowPilot AI",
-    category: "SaaS Platform",
+    category: "Interface Concept",
     summary: "A workflow automation interface concept with a local flow simulation and illustrative sample content. It has no external integrations.",
     problem: "Demonstrating how a workflow automation interface could be configured and previewed.",
     architecture: "React + Vite + Framer Motion",
@@ -162,8 +162,8 @@ export const PROJECTS: Project[] = [
     image: "/projects/flowpilot.png",
     imageMode: "cover",
     environment: "signal",
-    accent: "93 242 192",
-    accent2: "79 214 255",
+    accent: "190 145 139",
+    accent2: "216 189 145",
     repo: "https://github.com/DeepanshuAI/FlowPilot",
     href: "https://flow-pilot-pi.vercel.app/"
   }

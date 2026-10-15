@@ -1,51 +1,37 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { loader } from "@/lib/loader";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-/**
- * Preloads an image sequence into memory and reports progress to the global
- * loader store. Frames are decoded once; drawing a frame is a single
- * drawImage() call — the performant "Apple scroll sequence" technique.
- */
+/** Requests a small image window around the active frame for the scroll visual. */
 export function useImageSequence(count: number, srcFor: (i: number) => string, reducedMotion = false) {
   const images = useRef<HTMLImageElement[]>([]);
+  const requested = useRef<Set<number>>(new Set());
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    let cancelled = false;
-    let loaded = 0;
-    const arr: HTMLImageElement[] = new Array(count);
-    const shouldReduceMotion = reducedMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const staticFrame = Math.round(0.08 * (count - 1)) + 1;
-    const frameNumbers = shouldReduceMotion
-      ? [staticFrame]
-      : Array.from({ length: count }, (_, index) => index + 1);
-
-    setReady(false);
-    for (const i of frameNumbers) {
+  const requestFrames = useCallback((center: number, radius = 2) => {
+    const low = Math.max(1, center - radius);
+    const high = Math.min(count, center + radius);
+    for (let frame = low; frame <= high; frame += 1) {
+      if (requested.current.has(frame)) continue;
+      requested.current.add(frame);
       const img = new Image();
       img.decoding = "async";
-      img.fetchPriority = i === 1 || shouldReduceMotion ? "high" : "low";
-      const done = () => {
-        if (cancelled) return;
-        loaded += 1;
-        loader.set(loaded / frameNumbers.length);
-        if (loaded >= frameNumbers.length) setReady(true);
-      };
-      img.onload = done;
-      img.onerror = done; // never trap the loader on a single 404
-      img.src = srcFor(i);
-      arr[i - 1] = img;
+      img.fetchPriority = frame === center ? "high" : "low";
+      img.onload = () => setReady(true);
+      img.onerror = () => requested.current.delete(frame);
+      img.src = srcFor(frame);
+      images.current[frame - 1] = img;
     }
-    images.current = arr;
+  }, [count, srcFor]);
 
-    return () => {
-      cancelled = true;
-    };
-  }, [count, srcFor, reducedMotion]);
+  useEffect(() => {
+    const shouldReduceMotion = reducedMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const staticFrame = Math.round(0.08 * (count - 1)) + 1;
+    if (shouldReduceMotion) requestFrames(staticFrame, 0);
+    else requestFrames(1, 2);
+  }, [count, reducedMotion, requestFrames]);
 
-  return { images, ready };
+  return { images, ready, requestFrames };
 }
 
 /** Draw an image to fill (cover) the canvas, centred. */
