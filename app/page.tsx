@@ -11,6 +11,7 @@ const EngineeringCore = dynamic(() => import("@/components/sections/EngineeringC
 const Projects = dynamic(() => import("@/components/sections/Projects"));
 const Skills = dynamic(() => import("@/components/sections/Skills"));
 const Process = dynamic(() => import("@/components/sections/Process"));
+const Evidence = dynamic(() => import("@/components/sections/Evidence"));
 const Contact = dynamic(() => import("@/components/sections/Contact"));
 const Footer = dynamic(() => import("@/components/sections/Footer"));
 
@@ -23,6 +24,7 @@ export default function Page() {
       <EngineeringCore />
       <Skills />
       <Process />
+      <Evidence />
       <Contact />
       <Footer />
     </main>

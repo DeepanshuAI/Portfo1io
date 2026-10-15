@@ -28,7 +28,7 @@ export default function SectionHeading({
       )}
     >
       <motion.div
-        initial={false}
+        initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={IN_VIEW}
         transition={{ duration: DUR.base, ease: EASE }}
@@ -53,7 +53,7 @@ export default function SectionHeading({
       </motion.div>
 
       <motion.h2
-        initial={false}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={IN_VIEW}
         transition={{ duration: DUR.slow, delay: 0.05, ease: EASE }}
@@ -67,7 +67,7 @@ export default function SectionHeading({
 
       {intro && (
         <motion.p
-          initial={false}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={IN_VIEW}
           transition={{ duration: DUR.slow, delay: 0.12, ease: EASE }}

@@ -1,47 +1,69 @@
-import SectionHeading from "@/components/ui/SectionHeading";
+"use client";
 
-const capabilities = [
-  {
-    number: "01",
-    title: "Interface development",
-    details: "React, TypeScript, and Tailwind CSS appear in the portfolio and project interfaces. The examples include responsive page layouts, reusable components, and client-side interactions.",
-    proof: "Portfolio · Kairos · FlowPilot AI",
-  },
-  {
-    number: "02",
-    title: "Full-stack foundations",
-    details: "The Student Management System pairs a React client with an Express API and MongoDB models for student records, attendance, and grades.",
-    proof: "Student Management System",
-  },
-  {
-    number: "03",
-    title: "Interactive visuals",
-    details: "Three.js and React Three Fiber power the portfolio scenes and Kairos resort presentation. These are project examples, not a claim of professional production experience.",
-    proof: "Portfolio · Kairos",
-  },
-];
+import SectionHeading from "@/components/ui/SectionHeading";
 
 export default function Skills() {
   return (
-    <section id="skills" className="section-y relative z-10">
-      <div className="shell">
+    <section id="skills" className="section-y relative z-10 flex min-h-[80vh] flex-col items-center justify-center">
+      <div className="shell w-full text-center">
         <SectionHeading
           index="03"
-          eyebrow="Skills in context"
-          title={<>The tools, <span className="text-gradient">shown through the work.</span></>}
-          intro="A short map of the technologies used in the projects above, with a direct pointer to where each is demonstrated."
+          eyebrow="Capabilities"
+          title={
+            <>
+              Mindset & <span className="text-gradient">Discipline</span>
+            </>
+          }
+          intro="Engineering is not just writing code. It is a methodology for solving complex problems in reality."
+          align="center"
         />
-        <div className="mt-12 border-t border-white/10 md:mt-16">
-          {capabilities.map((item) => (
-            <article key={item.number} className="grid gap-3 border-b border-white/10 py-7 sm:grid-cols-[3rem_minmax(0,0.8fr)_minmax(0,1.2fr)] sm:gap-6 sm:py-8">
-              <span className="font-mono text-xs text-[rgb(var(--accent))]">{item.number}</span>
-              <h3 className="font-display text-display-sm font-medium">{item.title}</h3>
-              <div>
-                <p className="max-w-[62ch] text-body-sm text-ink-muted">{item.details}</p>
-                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-ink-faint">Evidence: {item.proof}</p>
-              </div>
-            </article>
-          ))}
+
+        <div className="mx-auto mt-20 max-w-4xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 text-left">
+          
+          <div className="space-y-4 relative group">
+            <div className="absolute -inset-4 rounded-xl bg-white/0 group-hover:bg-white/5 transition-colors duration-500" />
+            <h3 className="relative text-xl font-mono text-ink tracking-tight flex items-center gap-3">
+              <span className="text-ink-muted/50 text-sm">01.</span> Problem Solving
+            </h3>
+            <p className="relative text-ink-muted">
+              Breaking down monolithic challenges into systematic, testable parts.
+              I focus on the root cause rather than treating symptoms.
+            </p>
+          </div>
+
+          <div className="space-y-4 relative group">
+            <div className="absolute -inset-4 rounded-xl bg-white/0 group-hover:bg-white/5 transition-colors duration-500" />
+            <h3 className="relative text-xl font-mono text-ink tracking-tight flex items-center gap-3">
+              <span className="text-ink-muted/50 text-sm">02.</span> Debugging
+            </h3>
+            <p className="relative text-ink-muted">
+              Treating errors as information. Reading stack traces deeply, isolating state, 
+              and understanding system behavior under stress.
+            </p>
+          </div>
+
+          <div className="space-y-4 relative group">
+            <div className="absolute -inset-4 rounded-xl bg-white/0 group-hover:bg-white/5 transition-colors duration-500" />
+            <h3 className="relative text-xl font-mono text-ink tracking-tight flex items-center gap-3">
+              <span className="text-ink-muted/50 text-sm">03.</span> Testing
+            </h3>
+            <p className="relative text-ink-muted">
+              Writing code that proves it works. Defining expected outcomes before building, 
+              ensuring resilience against edge cases.
+            </p>
+          </div>
+
+          <div className="space-y-4 relative group">
+            <div className="absolute -inset-4 rounded-xl bg-white/0 group-hover:bg-white/5 transition-colors duration-500" />
+            <h3 className="relative text-xl font-mono text-ink tracking-tight flex items-center gap-3">
+              <span className="text-ink-muted/50 text-sm">04.</span> Surfing
+            </h3>
+            <p className="relative text-ink-muted">
+              Navigating uncertainty and finding balance in turbulent environments. 
+              Patience, reading the conditions, and committing fully to the wave.
+            </p>
+          </div>
+
         </div>
       </div>
     </section>

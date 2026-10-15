@@ -12,15 +12,14 @@ export default function Footer() {
           <p className="text-xs tracking-widest text-ink-muted uppercase font-mono">{SITE.role}</p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+        <div className="flex items-center space-x-8">
           {SITE.socials.map((s) => (
             <a 
               key={s.label}
               href={s.href}
-              target={s.href.startsWith("http") ? "_blank" : undefined}
-              rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              download={s.label === "Resume" ? "Deepanshu-Yadav-Resume.pdf" : undefined}
-              className="inline-flex min-h-11 items-center text-xs font-mono text-ink-muted hover:text-ink transition-colors uppercase tracking-widest focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[rgb(var(--accent))]"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-ink-muted/50 hover:text-ink transition-colors uppercase tracking-widest"
             >
               {s.label}
             </a>
