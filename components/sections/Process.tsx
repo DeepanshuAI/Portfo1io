@@ -33,14 +33,14 @@ export default function Process() {
         <div className="mx-auto w-full max-w-6xl px-2 md:px-6">
           <SectionHeading
             index="05"
-            eyebrow="Production Pipeline"
+            eyebrow="A project workflow"
             title={
               <>
-                How an idea becomes{" "}
-                <span className="text-gradient">inevitable</span>.
+                From a question to a{" "}
+                <span className="text-gradient">working build</span>.
               </>
             }
-            intro="Every project runs the same pipeline. One idea travels the line — watch it gain structure, then surface, then content."
+            intro="A practical sequence for taking a web project from a defined problem through implementation and review."
           />
 
           {/* the artifact, evolving */}

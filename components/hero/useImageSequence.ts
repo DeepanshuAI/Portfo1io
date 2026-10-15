@@ -8,7 +8,7 @@ import { loader } from "@/lib/loader";
  * loader store. Frames are decoded once; drawing a frame is a single
  * drawImage() call — the performant "Apple scroll sequence" technique.
  */
-export function useImageSequence(count: number, srcFor: (i: number) => string) {
+export function useImageSequence(count: number, srcFor: (i: number) => string, reducedMotion = false) {
   const images = useRef<HTMLImageElement[]>([]);
   const [ready, setReady] = useState(false);
 
@@ -16,15 +16,22 @@ export function useImageSequence(count: number, srcFor: (i: number) => string) {
     let cancelled = false;
     let loaded = 0;
     const arr: HTMLImageElement[] = new Array(count);
+    const shouldReduceMotion = reducedMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const staticFrame = Math.round(0.08 * (count - 1)) + 1;
+    const frameNumbers = shouldReduceMotion
+      ? [staticFrame]
+      : Array.from({ length: count }, (_, index) => index + 1);
 
-    for (let i = 1; i <= count; i++) {
+    setReady(false);
+    for (const i of frameNumbers) {
       const img = new Image();
       img.decoding = "async";
+      img.fetchPriority = i === 1 || shouldReduceMotion ? "high" : "low";
       const done = () => {
         if (cancelled) return;
         loaded += 1;
-        loader.set(loaded / count);
-        if (loaded >= count) setReady(true);
+        loader.set(loaded / frameNumbers.length);
+        if (loaded >= frameNumbers.length) setReady(true);
       };
       img.onload = done;
       img.onerror = done; // never trap the loader on a single 404
@@ -36,7 +43,7 @@ export function useImageSequence(count: number, srcFor: (i: number) => string) {
     return () => {
       cancelled = true;
     };
-  }, [count, srcFor]);
+  }, [count, srcFor, reducedMotion]);
 
   return { images, ready };
 }

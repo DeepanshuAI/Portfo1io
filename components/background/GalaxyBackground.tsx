@@ -16,6 +16,7 @@ export default function GalaxyBackground() {
 
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let redraw: (() => void) | undefined;
     
     const resize = () => {
       width = window.innerWidth;
@@ -24,11 +25,9 @@ export default function GalaxyBackground() {
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.scale(dpr, dpr);
+      if (reducedMotion) redraw?.();
     };
     
-    resize();
-    window.addEventListener("resize", resize);
-
     // Star properties
     const numStars = 200;
     const stars: { x: number; y: number; z: number; size: number; alpha: number }[] = [];
@@ -116,9 +115,12 @@ export default function GalaxyBackground() {
       }
       ctx.restore();
 
-      animationFrame = requestAnimationFrame(render);
+      if (!reducedMotion) animationFrame = requestAnimationFrame(render);
     };
 
+    redraw = render;
+    resize();
+    window.addEventListener("resize", resize);
     render();
 
     return () => {

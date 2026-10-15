@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE } from "@/lib/motion";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 
 export default function Preloader() {
+  const reduced = usePrefersReducedMotion();
   const [stage, setStage] = useState<0 | 1 | 2>(0);
   const [showName, setShowName] = useState(false);
   const [exit, setExit] = useState(false);
@@ -13,11 +15,16 @@ export default function Preloader() {
   useEffect(() => {
     setMounted(true);
 
+    if (reduced) {
+      setExit(true);
+      return;
+    }
+
     // Timeline sequence
-    const t1 = setTimeout(() => setStage(1), 800); // Building System
-    const t2 = setTimeout(() => setShowName(true), 1400); // Reveal Name
-    const t3 = setTimeout(() => setStage(2), 2000); // Ready
-    const t4 = setTimeout(() => setExit(true), 2400); // Trigger Exit
+    const t1 = setTimeout(() => setStage(1), 180);
+    const t2 = setTimeout(() => setShowName(true), 280);
+    const t3 = setTimeout(() => setStage(2), 480);
+    const t4 = setTimeout(() => setExit(true), 700);
 
     return () => {
       clearTimeout(t1);
@@ -25,7 +32,7 @@ export default function Preloader() {
       clearTimeout(t3);
       clearTimeout(t4);
     };
-  }, []);
+  }, [reduced]);
 
   if (!mounted) return null;
 
@@ -134,7 +141,7 @@ export default function Preloader() {
                         DEEPANSHU YADAV
                       </span>
                       <span className="font-mono text-[9px] md:text-[10px] tracking-[0.3em] text-[rgb(var(--accent))] mt-2">
-                        FULL STACK DEVELOPER
+                        JUNIOR FRONTEND · FULL-STACK
                       </span>
                     </motion.div>
                   )}
@@ -147,7 +154,7 @@ export default function Preloader() {
                   className="absolute top-0 left-0 bottom-0 bg-white"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{ duration: 2, ease: "easeInOut" }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
                 />
               </div>
 

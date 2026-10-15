@@ -63,17 +63,10 @@ export default function ProjectScene1({
             ))}
           </div>
 
-          {(project.repo || project.href) && (
-            <a 
-              href={project.repo || project.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-10 group flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white hover:text-white/80 transition-colors"
-            >
-              <span style={{ color: `rgb(${project.accent})` }}>Explore Project</span>
-              <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
-            </a>
-          )}
+          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 font-mono text-xs uppercase tracking-widest">
+            {project.href && <a aria-label={`View ${project.title} live demo`} href={project.href} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300">Live demo <span aria-hidden="true">↗</span></a>}
+            {project.repo && <a aria-label={`View ${project.title} source code`} href={project.repo} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/75 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300">Source code <span aria-hidden="true">↗</span></a>}
+          </div>
         </motion.div>
 
         {/* RIGHT: PROJECT VISUAL */}

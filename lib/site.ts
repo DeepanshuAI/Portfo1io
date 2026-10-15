@@ -4,11 +4,11 @@
 
 export const SITE = {
   name: "DEEPANSHU YADAV",
-  role: "Full Stack Developer",
-  statement: "Building scalable web applications with engineering precision and design discipline.",
+  role: "Junior Frontend & Full-Stack Developer",
+  statement: "I build responsive web interfaces and full-stack projects with a focus on clear, considered design.",
   email: "deepanshu4551@gmail.com",
   location: "India",
-  availability: "Graduating 2026 · open to full-time roles",
+  availability: "Early-career developer · open to junior roles",
   socials: [
     { label: "GitHub", href: "https://github.com/DeepanshuAI" },
     { label: "LinkedIn", href: "https://linkedin.com/in/deepanshu-yadav-484a82270/" },
@@ -47,9 +47,6 @@ export type SkillNode = {
   category: string;
   description: string;
   projects: string[];
-  level: string;
-  capabilities: string[];
-  experience: string;
 };
 
 export type SkillLayer = {
@@ -62,260 +59,35 @@ export type SkillLayer = {
 export const SKILL_LAYERS: SkillLayer[] = [
   {
     key: "frontend",
-    label: "Frontend Systems",
-    color: "79 214 255", // cyan
+    label: "Frontend",
+    color: "79 214 255",
     nodes: [
-      {
-        name: "React",
-        category: "Frontend Library",
-        description: "Used for building scalable component-based interfaces with declarative paradigms.",
-        projects: ["Portfolio", "Telemedicine Platform", "Student Management System"],
-        level: "Advanced",
-        capabilities: ["Component Architecture", "State Management", "Performance Optimization"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Next.js",
-        category: "React Framework",
-        description: "Provides hybrid static & server rendering, smart routing, and seamless API integration.",
-        projects: ["Portfolio", "Student Management System"],
-        level: "Advanced",
-        capabilities: ["Server Components", "App Router", "Static Site Generation"],
-        experience: "3+ Years",
-      },
-      {
-        name: "TypeScript",
-        category: "Language",
-        description: "Enforces strict type safety and object-oriented paradigms across the entire stack.",
-        projects: ["Portfolio", "Telemedicine Platform", "Trading Bot"],
-        level: "Advanced",
-        capabilities: ["Static Typing", "Generics", "Interface Design"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Tailwind",
-        category: "Styling",
-        description: "Utility-first CSS framework for rapid, highly customizable UI development.",
-        projects: ["Portfolio", "Student Management System"],
-        level: "Advanced",
-        capabilities: ["Responsive Design", "Design Systems", "Animation"],
-        experience: "3+ Years",
-      }
+      { name: "React", category: "UI library", description: "Component based UI library used in the portfolio and featured projects.", projects: ["Portfolio", "Student Management System", "Kairos", "FlowPilot AI"] },
+      { name: "TypeScript", category: "Language", description: "Used in the portfolio and Kairos frontend.", projects: ["Portfolio", "Kairos"] },
+      { name: "Tailwind CSS", category: "Styling", description: "Utility CSS used in the portfolio and featured project interfaces.", projects: ["Portfolio", "Student Management System", "FlowPilot AI"] },
+      { name: "Vite", category: "Build tool", description: "Build tool used by the Kairos and FlowPilot projects.", projects: ["Kairos", "FlowPilot AI"] },
     ],
   },
   {
-    key: "backend",
-    label: "Backend Systems",
-    color: "93 242 192", // mint
+    key: "fullstack",
+    label: "Full-Stack",
+    color: "93 242 192",
     nodes: [
-      {
-        name: "Node.js",
-        category: "Runtime Environment",
-        description: "Event-driven, non-blocking I/O model for building highly scalable network applications.",
-        projects: ["Telemedicine Platform", "Trading Bot"],
-        level: "Advanced",
-        capabilities: ["Event Loop", "Streams", "Asynchronous Processing"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Express",
-        category: "Web Framework",
-        description: "Fast, unopinionated, minimalist web framework for Node.js.",
-        projects: ["Telemedicine Platform", "Student Management System"],
-        level: "Advanced",
-        capabilities: ["Middleware Architecture", "Routing", "Error Handling"],
-        experience: "3+ Years",
-      },
-      {
-        name: "REST APIs",
-        category: "Architecture",
-        description: "Designing stateless, scalable, and secure communication protocols.",
-        projects: ["Telemedicine Platform", "Student Management System", "Trading Bot"],
-        level: "Advanced",
-        capabilities: ["Resource Modeling", "Status Codes", "Rate Limiting"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Authentication",
-        category: "Security",
-        description: "Implementing robust identity verification and access control systems.",
-        projects: ["Telemedicine Platform", "Student Management System"],
-        level: "Advanced",
-        capabilities: ["JWT", "OAuth 2.0", "Role-Based Access Control"],
-        experience: "3+ Years",
-      }
+      { name: "Node.js", category: "Runtime", description: "Runtime used by the Student Management System API.", projects: ["Student Management System"] },
+      { name: "Express", category: "Web framework", description: "Server framework used for the Student Management System API.", projects: ["Student Management System"] },
+      { name: "MongoDB", category: "Database", description: "Database used by the Student Management System API.", projects: ["Student Management System"] },
+      { name: "REST API", category: "HTTP API", description: "The Student Management System frontend communicates with its API over HTTP.", projects: ["Student Management System"] },
     ],
   },
   {
-    key: "database",
-    label: "Database Systems",
-    color: "139 123 255", // violet
+    key: "interface",
+    label: "Interactive UI",
+    color: "139 123 255",
     nodes: [
-      {
-        name: "PostgreSQL",
-        category: "Relational Database",
-        description: "Advanced, enterprise-class open source relational database with robust ACID compliance.",
-        projects: ["Telemedicine Platform", "Portfolio"],
-        level: "Advanced",
-        capabilities: ["Complex Joins", "Indexing", "Transactions"],
-        experience: "3+ Years",
-      },
-      {
-        name: "MongoDB",
-        category: "NoSQL Database",
-        description: "Document-oriented database designed for flexible, scalable, and agile data storage.",
-        projects: ["Student Management System"],
-        level: "Intermediate",
-        capabilities: ["Aggregation Pipeline", "Replication", "Document Modeling"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Redis",
-        category: "In-Memory Datastore",
-        description: "Lightning-fast data structure server used as a database, cache, and message broker.",
-        projects: ["Telemedicine Platform", "Trading Bot"],
-        level: "Intermediate",
-        capabilities: ["Caching Strategies", "Pub/Sub", "Session Management"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Prisma",
-        category: "ORM",
-        description: "Next-generation Node.js and TypeScript ORM for safe, efficient database access.",
-        projects: ["Portfolio", "Telemedicine Platform"],
-        level: "Intermediate",
-        capabilities: ["Schema Migration", "Type-safe Queries", "Data Modeling"],
-        experience: "3+ Years",
-      }
-    ],
-  },
-  {
-    key: "devops",
-    label: "DevOps Systems",
-    color: "255 180 87", // amber
-    nodes: [
-      {
-        name: "Docker",
-        category: "Containerization",
-        description: "Isolating applications into standardized environments for consistent deployment.",
-        projects: ["Telemedicine Platform", "Trading Bot"],
-        level: "Intermediate",
-        capabilities: ["Image Optimization", "Compose Orchestration", "Environment Parity"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Nginx",
-        category: "Web Server",
-        description: "High-performance HTTP server and reverse proxy for load balancing.",
-        projects: ["Telemedicine Platform", "Student Management System"],
-        level: "Intermediate",
-        capabilities: ["Reverse Proxying", "Load Balancing", "SSL Termination"],
-        experience: "3+ Years",
-      },
-      {
-        name: "CI/CD",
-        category: "Delivery Pipeline",
-        description: "Automating the testing and deployment lifecycle for rapid iteration.",
-        projects: ["Portfolio", "Trading Bot"],
-        level: "Advanced",
-        capabilities: ["Automated Testing", "Deployment Automation", "Rollbacks"],
-        experience: "3+ Years",
-      },
-      {
-        name: "GitHub Actions",
-        category: "Workflow Automation",
-        description: "Native workflow engine for orchestrating CI/CD pipelines directly within GitHub.",
-        projects: ["Portfolio", "Telemedicine Platform"],
-        level: "Advanced",
-        capabilities: ["Workflow Orchestration", "Custom Actions", "Matrix Builds"],
-        experience: "3+ Years",
-      }
-    ],
-  },
-  {
-    key: "ai",
-    label: "AI Systems",
-    color: "255 106 213", // magenta
-    nodes: [
-      {
-        name: "OpenAI",
-        category: "LLM Provider",
-        description: "Integrating powerful generative capabilities through state-of-the-art foundation models.",
-        projects: ["Trading Bot", "Portfolio"],
-        level: "Advanced",
-        capabilities: ["Prompt Engineering", "Function Calling", "Embeddings"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Gemini",
-        category: "LLM Provider",
-        description: "Leveraging multimodal AI models for complex reasoning and contextual understanding.",
-        projects: ["Portfolio"],
-        level: "Intermediate",
-        capabilities: ["Multimodal Processing", "Context Windows", "API Integration"],
-        experience: "3+ Years",
-      },
-      {
-        name: "AI Workflows",
-        category: "System Architecture",
-        description: "Designing agentic pipelines that sequence multiple LLM tasks autonomously.",
-        projects: ["Trading Bot"],
-        level: "Advanced",
-        capabilities: ["Agentic Chains", "Memory Management", "Tool Use"],
-        experience: "3+ Years",
-      },
-      {
-        name: "RAG Systems",
-        category: "Architecture",
-        description: "Retrieval-Augmented Generation to ground LLM outputs in proprietary data.",
-        projects: ["Telemedicine Platform"],
-        level: "Intermediate",
-        capabilities: ["Vector Search", "Chunking Strategies", "Knowledge Retrieval"],
-        experience: "3+ Years",
-      }
-    ],
-  },
-  {
-    key: "automation",
-    label: "Automation Systems",
-    color: "180 210 255", // light blue
-    nodes: [
-      {
-        name: "Email Automation",
-        category: "Communication",
-        description: "Programmatic orchestration of transactional and marketing email sequences.",
-        projects: ["Student Management System"],
-        level: "Advanced",
-        capabilities: ["SMTP Integration", "Template Rendering", "Deliverability Tracking"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Integrations",
-        category: "API Connectivity",
-        description: "Stitching together disparate third-party services into cohesive workflows.",
-        projects: ["Telemedicine Platform", "Trading Bot"],
-        level: "Advanced",
-        capabilities: ["OAuth Flows", "Webhooks", "Data Synchronization"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Workflow Systems",
-        category: "Orchestration",
-        description: "Designing resilient state machines to handle long-running, multi-step processes.",
-        projects: ["Trading Bot"],
-        level: "Advanced",
-        capabilities: ["State Machines", "Retry Logic", "Distributed Tracing"],
-        experience: "3+ Years",
-      },
-      {
-        name: "Python",
-        category: "Language",
-        description: "Versatile language utilized for scripting, data pipelines, and system automation.",
-        projects: ["Trading Bot"],
-        level: "Advanced",
-        capabilities: ["Scripting", "Data Processing", "CLI Development"],
-        experience: "3+ Years",
-      }
+      { name: "Framer Motion", category: "Animation library", description: "Used for animated interface elements in the portfolio and FlowPilot.", projects: ["Portfolio", "FlowPilot AI"] },
+      { name: "Three.js", category: "3D library", description: "Used for the portfolio's WebGL scenes and the Kairos 3D experience.", projects: ["Portfolio", "Kairos"] },
+      { name: "WebGL", category: "Graphics API", description: "Rendering technology used by the portfolio's interactive scenes.", projects: ["Portfolio"] },
+      { name: "React Router", category: "Routing library", description: "Client-side routing used in the Student Management System and FlowPilot.", projects: ["Student Management System", "FlowPilot AI"] },
     ],
   },
 ];
@@ -326,7 +98,6 @@ export type Project = {
   id: string;
   title: string;
   category: string;
-  year: string;
   summary: string;
   problem: string;
   architecture: string;
@@ -347,32 +118,29 @@ export const PROJECTS: Project[] = [
     id: "stumansys",
     title: "Student Management System",
     category: "Full-Stack Platform",
-    year: "2024",
-    summary: "A full-stack academic management platform built with the MERN stack to streamline student administration, attendance tracking, examination management, and report generation.",
-    problem: "Educational institutions needed a centralized dashboard to replace scattered records.",
-    architecture: "React Client -> Express API -> MongoDB",
+    summary: "A student administration app with student records, attendance, and grade entry, built around a React client and Express API.",
+    problem: "A single interface for managing student records and related academic data.",
+    architecture: "React client -> Express API -> MongoDB",
     stack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
-    outcome: "Unified academic workflows into a single dashboard.",
-    technicalDecisions: "Adopted MongoDB to easily handle the flexible schema of student electives.",
+    outcome: "Includes student CRUD, attendance, and grade management flows.",
+    technicalDecisions: "The repository separates the React frontend from an Express API and stores student, attendance, and grade data with Mongoose models.",
     image: "/projects/stumansys.png",
     imageMode: "cover",
     environment: "holographic",
     accent: "79 214 255",
     accent2: "93 242 192",
     repo: "https://github.com/DeepanshuAI/Student-Management-System",
-    href: "https://student-management-system-opal-sigma.vercel.app/"
   },
   {
     id: "kairos",
     title: "Kairos",
     category: "Web Application",
-    year: "2024",
-    summary: "A modern React application built for high performance and seamless user experience.",
-    problem: "Needed a scalable frontend architecture.",
-    architecture: "React + Vite + TypeScript",
-    stack: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-    outcome: "Delivered a highly responsive user interface.",
-    technicalDecisions: "Utilized Vite for lightning-fast HMR and optimized production builds.",
+    summary: "A resort website prototype with 3D scenes, sample resort content, and client-side booking flows. It has no live booking backend.",
+    problem: "Presenting resort spaces and booking information through an immersive web experience.",
+    architecture: "React + TypeScript + Vite + Three.js",
+    stack: ["React", "TypeScript", "Vite", "Three.js", "Tailwind CSS"],
+    outcome: "The repository includes 3D presentation scenes, room content, and client-side booking flows.",
+    technicalDecisions: "The project uses React components for page sections and Three.js via React Three Fiber for 3D scenes.",
     image: "/projects/kairos.png",
     imageMode: "cover",
     environment: "crystal",
@@ -385,13 +153,12 @@ export const PROJECTS: Project[] = [
     id: "flowpilot",
     title: "FlowPilot AI",
     category: "SaaS Platform",
-    year: "2024",
-    summary: "A premium, high-conversion SaaS web application designed for automated enterprise workflow orchestrations. Delivers zero-latency interactive flow simulations and rich glassmorphic aesthetics.",
-    problem: "Enterprise workflows required an accessible, high-performance orchestration builder.",
-    architecture: "React 18 -> Vite 6 -> Framer Motion",
+    summary: "A workflow automation interface concept with a local flow simulation and illustrative sample content. It has no external integrations.",
+    problem: "Demonstrating how a workflow automation interface could be configured and previewed.",
+    architecture: "React + Vite + Framer Motion",
     stack: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
-    outcome: "Achieved strict WAI-ARIA 1.2 compliance and rich interactive workflows.",
-    technicalDecisions: "Implemented a dynamic head engine for SEO and hardware-accelerated GPU transitions with reduced motion compliance.",
+    outcome: "Includes preset workflow examples and a timed client-side simulation; it does not execute external integrations.",
+    technicalDecisions: "The workflow preview is implemented as a local React state sequence, with preset step data in the component.",
     image: "/projects/flowpilot.png",
     imageMode: "cover",
     environment: "signal",
@@ -401,93 +168,6 @@ export const PROJECTS: Project[] = [
     href: "https://flow-pilot-pi.vercel.app/"
   }
 ];
-
-export type DesignThinkingStep = {
-  key: string;
-  label: string;
-  title: string;
-  body: string;
-  visual: "question" | "sketch" | "wireframe" | "system" | "shipped";
-};
-export type ArchitecturalPivot = {
-  title: string;
-  summary: string;
-  initialApproach: string;
-  whyItFailed: string;
-  finalDecision: string;
-  result: string;
-  architectureBefore: string[];
-  architectureAfter: string[];
-};
-
-export const DESIGN_THINKING = {
-  eyebrow: "03 — Method",
-  lead: "System architecture is just design thinking applied to code.",
-  body: "The same rigor used to resolve a user interface must be applied to the backend infrastructure.",
-  anchor: "stumansys",
-  anchorLabel: "Worked through on StuManSys",
-  steps: [
-    {
-      key: "frame",
-      label: "Frame",
-      title: "Identify the critical path",
-      body: "Before defining database schemas, we mapped the exact queries the administration runs daily.",
-      visual: "question",
-    },
-    {
-      key: "explore",
-      label: "Explore",
-      title: "Data model iterations",
-      body: "Testing relational vs document structures against the access patterns of the application.",
-      visual: "sketch",
-    },
-    {
-      key: "structure",
-      label: "Structure",
-      title: "API Contracts",
-      body: "Establishing strict JSON payloads and REST constraints before touching the frontend.",
-      visual: "wireframe",
-    },
-    {
-      key: "system",
-      label: "Systemise",
-      title: "Reusable services",
-      body: "Abstracting business logic away from controllers so it can be tested in isolation.",
-      visual: "system",
-    },
-    {
-      key: "resolve",
-      label: "Resolve",
-      title: "Deploy & Monitor",
-      body: "Shipping to production with adequate logging and error boundaries to catch edge cases.",
-      visual: "shipped",
-    },
-  ] as DesignThinkingStep[],
-  pivotsTitle: "Architectural Pivots",
-  pivotsNote: "Engineering decisions are about trade-offs. Here is why we changed course.",
-  pivots: [
-    {
-      title: "Monolithic State",
-      summary: "Replacing Redux with React Query",
-      initialApproach: "Hold all student records in a global Redux store.",
-      whyItFailed: "Caused data staleness and unnecessary re-renders on the client.",
-      finalDecision: "Scrapped Redux for React Query to ensure data freshness and cache invalidation.",
-      result: "Guaranteed data freshness and reduced client memory usage.",
-      architectureBefore: ["Component", "Redux Store", "UI"],
-      architectureAfter: ["Component", "React Query", "API", "Database"],
-    },
-    {
-      title: "Client-side Generation",
-      summary: "Offloading PDF generation to a worker",
-      initialApproach: "Generate report card PDFs entirely on the client-side.",
-      whyItFailed: "Too heavy on low-end devices, causing browser crashes and UI freezes.",
-      finalDecision: "Moved report card generation to a Node.js background worker.",
-      result: "Zero client blocking and faster, more reliable PDF generation.",
-      architectureBefore: ["Client", "PDF Builder", "Browser Download"],
-      architectureAfter: ["Client", "API", "Node.js Worker", "PDF Storage"],
-    }
-  ] as ArchitecturalPivot[],
-};
 
 export type ProcessStage = {
   key: string;
@@ -536,7 +216,7 @@ export const PROCESS: ProcessStage[] = [
     label: "Test",
     blurb: "Intentional iteration. Elements dim and get replaced.",
     question: "Is it resilient?",
-    output: "Validated builds",
+    output: "Reviewed build",
     artifact: "/process/test.jpg",
   },
   {
@@ -544,7 +224,7 @@ export const PROCESS: ProcessStage[] = [
     label: "Ship",
     blurb: "The final form becomes stable. Coherent finished system.",
     question: "Is it ready for production?",
-    output: "Live application",
+    output: "Release",
     artifact: "/process/ship.jpg",
   },
 ];
@@ -567,7 +247,7 @@ export const PLAYGROUND: PlaygroundModule[] = [
     tag: "Database",
     blurb: "Query optimization study.",
     variant: "grid",
-    objective: "Understand the performance impact of B-Tree indices on million-row tables.",
+    objective: "Explore how database indexes affect query plans and response time.",
   },
   {
     id: "p2",
@@ -575,7 +255,7 @@ export const PLAYGROUND: PlaygroundModule[] = [
     tag: "Systems",
     blurb: "Real-time message broker.",
     variant: "wave",
-    objective: "Implement a low-latency chat service using Redis as the central event bus.",
+    objective: "Explore how Redis Pub/Sub can deliver messages to active subscribers.",
   },
   {
     id: "p3",
@@ -583,7 +263,7 @@ export const PLAYGROUND: PlaygroundModule[] = [
     tag: "Auth",
     blurb: "Stateless authentication flows.",
     variant: "orbit",
-    objective: "Secure communications between multiple independent services.",
+    objective: "Explore how signed tokens can carry identity between separate services.",
   },
 ];
 
@@ -594,7 +274,7 @@ export const PERSONAL = {
     university: "Pondicherry University",
     period: "2022 — 2026",
   },
-  tools: ["Docker", "PostgreSQL", "Next.js", "Git Actions", "Redis", "TypeScript"],
-  exploring: "Distributed systems, Rust, and advanced CI/CD pipelines.",
-  fact: "I treat infrastructure as code and design as a system.",
+  tools: ["React", "TypeScript", "Next.js", "Node.js", "Express", "MongoDB", "Three.js", "Tailwind CSS"],
+  exploring: "",
+  fact: "",
 };

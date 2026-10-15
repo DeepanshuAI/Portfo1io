@@ -149,14 +149,14 @@ export default function Playground() {
       <div className="shell">
         <SectionHeading
           index="06"
-          eyebrow="Experiments"
+          eyebrow="Topics to explore"
           title={
             <>
-              Tests from the{" "}
+              Ideas for the{" "}
               <span className="text-gradient">workbench</span>.
             </>
           }
-          intro="Six studies, each with an objective. What I was testing, the result, and what it changed about how I build — the failures included."
+          intro="Three possible technical explorations. These are learning ideas, not completed benchmarks or connected services."
         />
 
         <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

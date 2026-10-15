@@ -15,8 +15,8 @@ const smoothstep = (e0: number, e1: number, x: number) => {
 };
 
 export default function Hero() {
-  const { images, ready } = useImageSequence(HERO_SEQUENCE.count, srcFor);
   const reduced = usePrefersReducedMotion();
+  const { images, ready } = useImageSequence(HERO_SEQUENCE.count, srcFor, reduced);
 
   const pinRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -71,7 +71,7 @@ export default function Hero() {
       // Skip all drawing work when the hero is off-screen.
       const rect = pin.getBoundingClientRect();
       if (rect.bottom < -50 || rect.top > window.innerHeight + 50) {
-        raf = requestAnimationFrame(render);
+        if (!reduced) raf = requestAnimationFrame(render);
         return;
       }
 
@@ -148,7 +148,7 @@ export default function Hero() {
         m3WrapRef.current.style.transform = `translateY(${(1 - tIn) * 20 - tOut * 10}px)`;
       }
 
-      raf = requestAnimationFrame(render);
+      if (!reduced) raf = requestAnimationFrame(render);
     };
 
     raf = requestAnimationFrame(render);
@@ -188,28 +188,13 @@ export default function Hero() {
               }}
             />
 
-            {/* WATERMARK COVER MONOGRAM */}
-            <div className="absolute bottom-4 left-4 z-20 md:bottom-6 md:left-6">
-              <div className="group relative flex h-10 w-10 cursor-default items-center justify-center rounded-full border border-white/[0.08] bg-black/60 backdrop-blur-md transition-all duration-500 hover:border-white/20 hover:bg-black/80 hover:-translate-y-0.5">
-                <span className="font-display text-[11px] font-medium tracking-wider text-white/70 group-hover:text-white transition-colors duration-300">DY</span>
-                <span className="absolute -bottom-px left-1/2 h-px w-3 -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                
-                {/* Tooltip */}
-                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none">
-                  <span className="whitespace-nowrap font-mono text-[10px] uppercase tracking-widest text-white/40">
-                    Deepanshu Yadav
-                  </span>
-                </div>
-              </div>
-            </div>
-
             {/* MOBILE GRADIENT FADE OUT FOR SMOOTH BLEND */}
             <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-void to-transparent md:hidden pointer-events-none" />
           </div>
 
           <div
             ref={foreRef}
-            className="absolute bottom-0 h-[40svh] w-full flex flex-col justify-center px-6 md:inset-0 md:h-auto md:px-16 pointer-events-none"
+            className="absolute bottom-0 h-[48svh] w-full flex flex-col justify-center px-6 md:inset-0 md:h-auto md:px-16 pointer-events-none"
           >
             <div className="max-w-3xl pointer-events-auto">
               <motion.h1
@@ -236,14 +221,28 @@ export default function Hero() {
               >
                 {SITE.statement}
               </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 1, ease: EASE }}
+                className="mt-4 font-mono text-xs uppercase tracking-widest text-ink/55"
+              >
+                {SITE.availability}
+              </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.66, duration: 1, ease: EASE }}
-                className="mt-10"
+                className="mt-8 flex flex-wrap items-center gap-2 md:gap-4"
               >
-                <a href="#featured-systems" className="inline-flex items-center gap-3 border border-white/20 bg-white/5 px-6 py-3 font-mono text-sm tracking-widest text-white transition-colors hover:bg-white hover:text-black">
-                  VIEW SYSTEMS <span className="text-cyan-400">→</span>
+                <a href="#featured-systems" className="inline-flex min-h-12 items-center gap-2 border border-white/20 bg-white/5 px-4 py-3 font-mono text-xs tracking-widest text-white transition-colors hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:gap-3 md:px-6 md:text-sm">
+                  VIEW PROJECTS <span className="text-cyan-400" aria-hidden="true">→</span>
+                </a>
+                <a href="#contact" className="inline-flex min-h-12 items-center border border-white/10 px-4 py-3 font-mono text-xs tracking-widest text-white/75 transition-colors hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:px-6 md:text-sm">
+                  CONTACT
+                </a>
+                <a href="/resume.pdf" download="Deepanshu-Yadav-Resume.pdf" className="inline-flex min-h-12 items-center border border-cyan-300/30 px-4 py-3 font-mono text-xs tracking-widest text-cyan-200 transition-colors hover:border-cyan-200 hover:bg-cyan-200/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:px-6 md:text-sm">
+                  RESUME (PDF)
                 </a>
               </motion.div>
             </div>
@@ -297,7 +296,7 @@ export default function Hero() {
           </div>
 
           {/* WATERMARK COVER MONOGRAM */}
-          <div className="absolute bottom-4 left-4 z-20 md:bottom-6 md:left-6">
+          <div className="absolute left-4 top-4 z-20 md:bottom-6 md:left-6 md:top-auto">
             <div className="group relative flex h-10 w-10 cursor-default items-center justify-center rounded-full border border-white/[0.08] bg-black/60 backdrop-blur-md transition-all duration-500 hover:border-white/20 hover:bg-black/80 hover:-translate-y-0.5">
               <span className="font-display text-[11px] font-medium tracking-wider text-white/70 group-hover:text-white transition-colors duration-300">DY</span>
               <span className="absolute -bottom-px left-1/2 h-px w-3 -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -313,7 +312,7 @@ export default function Hero() {
 
           {/* scroll hint */}
           <motion.div
-            className="absolute bottom-7 left-1/2 -translate-x-1/2 text-center pointer-events-none"
+            className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 text-center pointer-events-none md:block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 1, ease: EASE }}

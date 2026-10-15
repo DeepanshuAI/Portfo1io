@@ -30,12 +30,21 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: `${SITE.name} — Full-Stack Developer`,
+  metadataBase: new URL("https://portfo1io-ashen.vercel.app"),
+  title: "Deepanshu Yadav | Junior Frontend & Full-Stack Developer",
   description: SITE.statement,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: `${SITE.name} — Full-Stack Developer`,
+    title: "Deepanshu Yadav | Junior Frontend & Full-Stack Developer",
     description: SITE.statement,
     type: "website",
+    url: "https://portfo1io-ashen.vercel.app/",
+    siteName: SITE.name,
+  },
+  twitter: {
+    card: "summary",
+    title: "Deepanshu Yadav | Junior Frontend & Full-Stack Developer",
+    description: SITE.statement,
   },
 };
 
@@ -55,6 +64,9 @@ export default function RootLayout({
           <Corridor />
           <SharedCanvasMount />
           <div className="relative z-10" style={{ overflowX: "clip" }}>
+            <a href="#featured-systems" className="sr-only fixed left-4 top-4 z-[100] rounded bg-white px-4 py-3 font-mono text-sm text-black focus:not-sr-only focus:outline focus:outline-2 focus:outline-cyan-300">
+              Skip to projects
+            </a>
             {children}
           </div>
           <EnergyRail />

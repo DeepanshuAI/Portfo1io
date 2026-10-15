@@ -43,6 +43,7 @@ export default function EnergyCrystalCursor() {
     const onMove = (e: PointerEvent) => {
       target.x = e.clientX;
       target.y = e.clientY;
+      if (reduced) tick();
       resetIdle();
     };
 
@@ -84,14 +85,15 @@ export default function EnergyCrystalCursor() {
         ringRef.current.style.transform = `translate(${current.x}px, ${current.y}px) translate(-50%, -50%) rotate(${angle}rad) scale(${stretch}, ${squash})`;
       }
       
-      raf = requestAnimationFrame(tick);
+      if (!reduced) raf = requestAnimationFrame(tick);
     };
 
     window.addEventListener("pointermove", onMove, { passive: true });
     document.addEventListener("pointerover", onOver, { passive: true });
     
     // Start loop & initial idle timer
-    raf = requestAnimationFrame(tick);
+    if (reduced) tick();
+    else raf = requestAnimationFrame(tick);
     resetIdle();
 
     return () => {

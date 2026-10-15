@@ -119,14 +119,9 @@ function TechLabel({
               <h4 className="text-2xl font-bold mb-1 tracking-tight" style={{ color: hexColor }}>
                 {node.name}
               </h4>
-              <div className="flex justify-between items-center mb-4">
-                <p className="text-xs font-mono text-gray-400 uppercase tracking-widest">
-                  {node.category}
-                </p>
-                <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-white/10 text-gray-300">
-                  {node.experience}
-                </span>
-              </div>
+              <p className="text-xs font-mono text-gray-400 uppercase tracking-widest mb-4">
+                {node.category}
+              </p>
               <p className="text-sm text-gray-200 mb-5 leading-relaxed">
                 {node.description}
               </p>
@@ -141,10 +136,10 @@ function TechLabel({
               </div>
               
               <div>
-                <strong className="block text-[10px] uppercase tracking-widest text-gray-500 mb-2">Key Capabilities</strong>
+                <strong className="block text-[10px] uppercase tracking-widest text-gray-500 mb-2">Project Evidence</strong>
                 <div className="flex flex-wrap gap-1.5">
-                  {node.capabilities.map(c => (
-                    <span key={c} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs">{c}</span>
+                  {node.projects.map(project => (
+                    <span key={project} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs">{project}</span>
                   ))}
                 </div>
               </div>
